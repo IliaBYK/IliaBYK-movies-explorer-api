@@ -1,8 +1,0 @@
-.button {
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.button:hover {
-  opacity: var(--opacity-button);
-}
