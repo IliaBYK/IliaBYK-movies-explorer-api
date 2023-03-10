@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+* [Ссылка на макет](https://disk.yandex.ru/d/t_beTK65kBNDcQ)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
