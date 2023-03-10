@@ -27,10 +27,13 @@ function Login(props) {
             <span className="register__span">E-Mail</span>
             <input
               className={inputErrorClassName(errors.email)}
-              name="email"
+              value={values.email ?? ""}
+              error={errors.email}
+              onChange={handleChange}
+              label="E-mail"
               type="email"
-              value={values.email}
-              onChange={handleChange} />
+              name="email"
+              required />
             <span className={spanErrorClassName(errors.email)}>{errors.email}</span>
           </label>
 
@@ -38,10 +41,13 @@ function Login(props) {
             <span className="register__span">Пароль</span>
             <input
               className={inputErrorClassName(errors.password)}
-              name="password"
+              value={values.password ?? ""}
+              error={errors.password}
+              onChange={handleChange}
+              label="Пароль"
               type="password"
-              value={values.password}
-              onChange={handleChange} />
+              name="password"
+              required />
             <span className={spanErrorClassName(errors.password)}>{errors.password}</span>
           </label>
         </fieldset>
