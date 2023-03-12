@@ -1,0 +1,8 @@
+.link {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.link:hover {
+  opacity: var(--opacity-link);
+}

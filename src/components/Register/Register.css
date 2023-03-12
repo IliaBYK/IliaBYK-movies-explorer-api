@@ -1,0 +1,153 @@
+.register {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+}
+
+.register__title {
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  text-align: left;
+  margin: 0 0 46px;
+}
+
+.register__form {
+  width: 396px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.register__set {
+  padding: 0;
+  border: none;
+  margin: 0 0 91px;
+}
+
+.register__set_place_login {
+  margin-bottom: 221px;
+}
+
+.register__field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.register__field:last-child {
+  margin-bottom: 0;
+}
+
+.register__input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--color-grey-tech-icon);
+  height: 39px;
+  padding: 0;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.register__input:focus {
+  border-bottom: 1px solid var(--color-blue-btn);
+}
+
+.register__input:invalid:focus {
+  border-bottom: 1px solid var(--color-grey-tech-icon);
+}
+
+.register__input_type_error {
+  color: var(--color-red);
+}
+
+.register__field:last-of-type .register__input {
+  margin-bottom: 0;
+}
+
+.register__span {
+  position: absolute;
+  top: -6px;
+  left: -1px;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--color-grey-about-dir);
+}
+
+.register__link {
+  text-decoration: none;
+  color: var(--color-blue-btn);
+}
+
+.register__btn {
+  height: 45px;
+  background: var(--color-blue-btn);
+  color: var(--color-white);
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.register__span-link {
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--color-grey-about-dir);
+  text-align: center;
+  display: block;
+}
+
+.register__error {
+  color: var(--color-red);
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  position: absolute;
+  top: 39px;
+  left: 0;
+}
+
+.register__field:last-child .register__error {
+  left: 0;
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .register__title {
+    margin: 0 0 45px;
+  }
+  .register__set {
+    margin-bottom: 152px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .register {
+    padding: 0 31px;
+  }
+  .register__title {
+    text-align: center;
+    margin-bottom: 86px;
+  }
+  .register__form {
+    width: 100%;
+  }
+  .register__span-link {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
+  .register__set {
+    margin-bottom: 240px;
+  }
+  .register__set_place_login {
+    margin-bottom: 309px;
+  }
+  .register__btn {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
+}

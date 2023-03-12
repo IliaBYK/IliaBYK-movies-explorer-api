@@ -1,0 +1,24 @@
+.cards {
+  padding: 79px 0 0;
+  max-height: 1114px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.cards__more {
+  max-height: max-content;
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .cards {
+    padding: 75px 0 0;
+    max-height: 1437px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cards {
+    padding: 46px 0 0;
+    max-height: 1487px;
+  }
+}

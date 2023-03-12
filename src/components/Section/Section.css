@@ -1,0 +1,127 @@
+.section-title {
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 400;
+  margin: 0 0 23px;
+}
+
+.section-title_place_footer {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  margin: 0 0 20px;
+  color: var(--color-grey-about-dir);
+  text-align: center;
+}
+
+.section-title_place_cards {
+  display: none;
+}
+
+.section-title_place_profile {
+  text-align: center;
+  font-size: 24px;
+  line-height: 29px;
+  margin-bottom: 119px;
+}
+
+.section-title_place_movies {
+  display: none;
+}
+
+.section-title_place_promo {
+  display: none;
+}
+
+.section-line {
+  height: 1px;
+  width: 100%;
+  background: var(--color-black);
+  margin-bottom: 70px;
+}
+
+.section-line_place_tech {
+  margin-bottom: 90px;
+}
+
+.section-line_place_about-me {
+  margin-bottom: 66px;
+}
+
+.section-line_place_footer {
+  margin-bottom: 20px;
+  background: var(--color-grey-tech-icon);
+}
+
+.section-line_place_movies {
+  display: none;
+}
+
+.section-line_place_cards {
+  display: none;
+}
+
+.section-line_place_profile {
+  display: none;
+}
+
+.section-line_place_promo {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .section-title {
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -1px;
+  }
+  .section-line_place_tech {
+    margin-bottom: 80px;
+  }
+  .section-line_place_about-me {
+    margin-bottom: 58px;
+  }
+  .section-title_place_profile {
+    margin: 17px 0 92px;
+    letter-spacing: 0.1px;
+  }
+  .section-title_place_footer {
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .section-title_place_about-project {
+    margin-bottom: 28px;
+  }
+  .section-line_place_about-project {
+    margin-bottom: 60px;
+  }
+  .section-title_place_tech {
+    margin-bottom: 28px;
+  }
+  .section-line_place_tech {
+    margin-bottom: 60px;
+  }
+  .section-title_place_about-me {
+    margin-bottom: 28px;
+    letter-spacing: -0.7px;
+  }
+  .section-line_place_about-me {
+    margin-bottom: 60px;
+  }
+  .section-title_place_footer {
+    font-size: 12px;
+    line-height: 14.5px;
+    margin-bottom: 20px;
+  }
+  .section-line_place_footer {
+    margin-bottom: 30px;
+  }
+}
