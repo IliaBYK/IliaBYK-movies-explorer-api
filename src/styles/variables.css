@@ -1,0 +1,23 @@
+:root {
+  --color-blue: #073042;
+  --color-blue-btn: #3456F3;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-white-opac: rgba(255, 255, 255, .6);
+  --color-green: #2BE080;
+  --color-placeh: rgba(204, 204, 204, 1);
+  --color-grey-about: #F2F2F2;
+  --color-grey-about-dir: #A0A0A0;
+  --color-grey-tech: #F5F5F5;
+  --color-grey-tech-icon: #E8E8E8;
+  --color-grey-form-field: #F9F9F9;
+  --color-border-btn: rgba(170, 170, 170, .2);
+  --color-grey-line: #E6E6E6;
+  --color-red: #FF3055;
+  --color-bg-card: #FDFDFD;
+  --color-bg-menu: rgba(0, 0, 0, .3);
+  --shadow-card: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  --opacity-button: .8;
+  --opacity-link: .7;
+  --transition: all .5s ease;
+}

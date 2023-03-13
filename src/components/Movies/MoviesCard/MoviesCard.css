@@ -1,0 +1,91 @@
+.card {
+  width: 100%;
+  box-shadow: var(--shadow-card);
+  border-radius: 6px;
+  background: var(--color-bg-card);
+  padding: 18px 0;
+  box-sizing: border-box;
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 18px;
+  object-fit: cover;
+}
+
+.card__info {
+  display: flex;
+  padding: 0 18px 18px;
+  box-sizing: border-box;
+}
+
+.card__description {
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.card__time {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-grey-about-dir);
+  letter-spacing: 1px;
+}
+
+.card__btn {
+  background: url(../../../images/like.svg) no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 29px;
+  border: none;
+  margin: 0 auto;
+  display: block;
+}
+
+.card__btn_save {
+  font-size: 12px;
+  line-height: 11px;
+  background: var(--color-grey-form-field);
+  border-radius: 30px;
+  width: 100px;
+  height: 29px;
+  border: none;
+  margin: 0 auto;
+  display: block;
+}
+
+.card__btn_del {
+  background: url(../../../images/delete-movie.svg);
+}
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .card__img {
+    height: 190px;
+  }
+  .card__line {
+    margin-bottom: 7px;
+  }
+  .card__description::after {
+    right: -2px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    margin-bottom: 7.5px;
+  }
+  .card__description {
+    font-size: 12px;
+  }
+  .card__img {
+    height: 168px;
+    margin-bottom: 14px;
+  }
+  .card__info {
+    padding: 0 14px 14px;
+  }
+}
