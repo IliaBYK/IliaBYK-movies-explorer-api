@@ -5,6 +5,7 @@
   background: var(--color-bg-card);
   padding: 18px 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .card__img {
@@ -13,6 +14,12 @@
   height: 200px;
   margin-bottom: 18px;
   object-fit: cover;
+  transition: all .5s linear;
+}
+
+.card__img:hover {
+  opacity: .8;
+  transform: scale(1.1);
 }
 
 .card__info {
@@ -26,6 +33,9 @@
   line-height: 18px;
   font-weight: 500;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__time {
@@ -37,16 +47,6 @@
 }
 
 .card__btn {
-  background: url(../../../images/like.svg) no-repeat;
-  background-size: contain;
-  width: 100px;
-  height: 29px;
-  border: none;
-  margin: 0 auto;
-  display: block;
-}
-
-.card__btn_save {
   font-size: 12px;
   line-height: 11px;
   background: var(--color-grey-form-field);
@@ -58,8 +58,14 @@
   display: block;
 }
 
-.card__btn_del {
-  background: url(../../../images/delete-movie.svg);
+.card__btn_save {
+  background: url(../../../images/like.svg) no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 29px;
+  border: none;
+  margin: 0 auto;
+  display: block;
 }
 
 @media screen and (max-width: 1023px) and (min-width: 768px) {

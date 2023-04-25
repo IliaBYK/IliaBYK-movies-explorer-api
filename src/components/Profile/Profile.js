@@ -1,21 +1,75 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useAsyncValue, useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { mainApi } from "../../utils/MainApi";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import Container from "../Container/Container";
+import { useAuth } from "../../hooks/useAuth";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
-function Profile () {
+function Profile ({signOut, handleUpdateUser, user}) {
+  //const {user} = useRouteLoaderData("user");
+  /* const user = useAsyncValue(); */
+  /* const {currentUser} = useContext(CurrentUserContext); */
+  const [isSucces, setIsSucces] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+/*   const { signout, handleUpdateUser, user } = useAuth(); */
+ /*  const navigate = useNavigate(); */
+
+  const { values, handleChange } = useFormAndValidation({
+    name: user?.name || " ",
+    email: user?.email || " ",
+  });
+
+  function edit() {
+    if (!isEditing) {
+      setIsEditing(true)
+    } else {
+      setIsEditing(false)
+    }
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    if (!isEditing) {
+      try {
+        handleUpdateUser(values);
+        setIsSucces(true);
+      } catch (err) {
+        console.log(err);
+        setIsSucces(false)
+      }
+    }
+  }
+
   return (
-    <Container class="profile" mix="profile" title="Привет, Виталий!">
-      <form className="profile__form">
+    <Container class="profile" mix="profile" title={`Привет, ${user?.name || ""}!`}>
+      <form className="profile__form" onSubmit={onSubmit}>
         <label className="profile__label">
-          <input className="profile__input" />
+          <input 
+            type="text"
+            name="name"
+            minLength={2}
+            maxLength={30}
+            className="profile__input" 
+            value={values.name}
+            onChange={handleChange}
+            disabled={!isEditing} />
           <span className="profile__placeholder">Имя</span>
         </label>
         <label className="profile__label">
-          <input className="profile__input" />
+          <input 
+            className="profile__input" 
+            value={values.email} 
+            type="Email" 
+            name="email"
+            onChange={handleChange}
+            disabled={!isEditing} />
           <span className="profile__placeholder">E-Mail</span>
         </label>
+        {isSucces? <p className="profile__message">Изменения сохранены!</p> : ""}
+        <button className="profile__btn button" type="submit" onClick={edit}>{isEditing? "Сохранить" : "Редактировать"}</button>
       </form>
-      <button className="profile__btn button">Редактировать</button>
-      <Link to="/signin" className="profile__out link">Выйти из аккаунта</Link>
+      <Link to="/signin" className="profile__out link" onClick={signOut}>Выйти из аккаунта</Link>
     </Container>
   )
 }

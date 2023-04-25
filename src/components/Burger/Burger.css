@@ -16,8 +16,8 @@
   background-color: var(--color-black);
   z-index: 100;
   position: absolute;
-  top: 23px;
-  left: 8px;
+  top: 22px;
+  right: 25px;
   transition: all .7s linear;
 }
 

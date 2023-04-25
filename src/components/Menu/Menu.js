@@ -1,66 +1,47 @@
-import { Link, Route } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
-function Menu ({isOpen}) {
+function Menu ({isOpen, clickLink}) {
+
+  const linkClassName = ({ isActive }) =>
+    `menu__link link${isActive ? ' menu__link_active' : ''}`;
+
   return (
     <aside className={isOpen ? "menu menu__opened" : "menu"}>
       <div className="menu__container">
         <nav className="menu__nav">
-          <Route exact path="/movies">
-            <ul className="menu__links">
-              <li className="menu__link-item">
-                <Link to="/" className="menu__link link">Главная</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/movies" className="menu__link menu__link_active link">Фильмы</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/saved-movies" className="menu__link link">Сохранённые фильмы</Link>
-              </li>
-            </ul>
-          </Route>
-          <Route exact path="/saved-movies">
-            <ul className="menu__links">
-              <li className="menu__link-item">
-                <Link to="/" className="menu__link link">Главная</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/movies" className="menu__link link">Фильмы</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/saved-movies" className="menu__link menu__link_active link">Сохранённые фильмы</Link>
-              </li>
-            </ul>
-          </Route>
-          <Route exact path="/">
-            <ul className="menu__links">
-              <li className="menu__link-item">
-                <Link to="/" className="menu__link link">Главная</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/movies" className="menu__link link">Фильмы</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/saved-movies" className="menu__link link">Сохранённые фильмы</Link>
-              </li>
-            </ul>
-          </Route>
-          <Route exact path="/profile">
-            <ul className="menu__links">
-              <li className="menu__link-item">
-                <Link to="/" className="menu__link link">Главная</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/movies" className="menu__link link">Фильмы</Link>
-              </li>
-              <li className="menu__link-item">
-                <Link to="/saved-movies" className="menu__link link">Сохранённые фильмы</Link>
-              </li>
-            </ul>
-          </Route>
+          <ul className="menu__links">
+            <li className="menu__link-item">
+              <NavLink 
+                to="/" 
+                className={linkClassName} 
+                onClick={clickLink}
+              >
+                Главная
+              </NavLink>
+            </li>
+            <li className="menu__link-item">
+              <NavLink 
+                to="/movies" 
+                className={linkClassName} 
+                onClick={clickLink}
+              >
+                Фильмы
+              </NavLink>
+            </li>
+            <li className="menu__link-item">
+              <NavLink 
+                to="/saved-movies" 
+                className={linkClassName} 
+                onClick={clickLink}
+              >
+                Сохранённые фильмы
+              </NavLink>
+            </li>
+          </ul>
         </nav>
-        <Link to="/profile" className="menu__btn_wrap">
-          <button className="menu__btn header__navbtn button">Аккаунт</button>
-        </Link>
+        <NavLink to="/profile" className="menu__btn_wrap">
+          <button className="menu__btn header__navbtn button" onClick={clickLink}>Аккаунт</button>
+        </NavLink>
       </div>
     </aside>
   )

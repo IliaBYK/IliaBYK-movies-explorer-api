@@ -1,68 +1,122 @@
-import { Link, Route } from "react-router-dom";
+/* import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Promo from "../Main/Promo/Promo";
 import Navigation from "../Navigation/Navigation";
 import Burger from "../Burger/Burger";
 
-function Header() {
+function Header({ loggedIn, isMain }) {
+
+  const location = useLocation();
+
+  const loginLoc = () => location.pathname === "/signin";
+  const regLoc = () => location.pathname === "/signup";
 
   return (
     <>
-      <Route exact path="/">
-        <header className="header">
+      <>
+        <header className={(!isMain ? "header_place_movies" : "") + " header"}>
           <nav className="header__head">
             <Link to="/">
-              <div className="header__logo button" />
+              <div className={(!loginLoc && !regLoc ? "header__logo_place_auth " : "") + " header__logo button"} />
             </Link>
-            <Navigation />
+            {!loginLoc && !regLoc ? <Navigation loggedIn={loggedIn} isMain={isMain}/> : null}
           </nav>
-          <Promo />
+          {isMain ? <Promo /> : null}
         </header>
-      </Route>
-      <Route exact path="/signup">
+      </>
+      <Route exact path="/signup" element={
         <header className="header_place_auth">
           <Link to="/">
             <div className="header__logo header__logo_place_auth button" />
           </Link>
           <h2 className="register__title">Добро пожаловать!</h2>
         </header>
-      </Route>
-      <Route exact path="/signin">
+      }/>
+      <Route exact path="/signin" element={
         <header className="header_place_auth">
           <Link to="/">
             <div className="header__logo header__logo_place_auth button" />
           </Link>
           <h2 className="register__title">Рады видеть!</h2>
-        </header>
-      </Route>
-      <Route exact path="/movies">
+        </header>}
+      />
+      <Route path="/movies" element={
         <header className="header header_place_movies">
           <Link to="/">
             <div className="header__logo button" />
           </Link>
           <Burger />
-          <Navigation />
-        </header>
-      </Route>
-      <Route exact path="/saved-movies">
+          <Navigation loggedIn={loggedIn} isMain={isMain} />
+        </header>}
+      />
+      <Route path="/saved-movies" element={
+        <header className="header header_place_movies">
+          <Link to="/">
+            <div className="header__logo button" />
+         </Link>
+         <Burger />
+          <Navigation loggedIn={loggedIn} isMain={isMain} />
+        </header>}
+      />
+      <Route path="/profile" element={
         <header className="header header_place_movies">
           <Link to="/">
             <div className="header__logo button" />
           </Link>
           <Burger />
-          <Navigation />
-        </header>
-      </Route>
-      <Route exact path="/profile">
-        <header className="header header_place_movies">
-          <Link to="/">
-            <div className="header__logo button" />
-          </Link>
-          <Burger />
-          <Navigation />
-        </header>
-      </Route>
+          <Navigation loggedIn={loggedIn} isMain={isMain} />
+        </header>}
+      />
     </>
   )
 }
 
-export default Header;
+export default Header; */
+
+
+import { useState, useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import Promo from "../Main/Promo/Promo";
+import Navigation from "../Navigation/Navigation";
+import Burger from "../Burger/Burger";
+
+function Header({ loggedIn }) {
+  /* const [isMain, setIsMain] = useState(false); */
+
+  const location = useLocation();
+
+  const loginLoc = () => location.pathname === "/signin";
+  const regLoc = () => location.pathname === "/signup";
+  const isMain = () => location.pathname === "/";
+
+  /* useEffect(() => setIsMain(location.pathname === "/"), [location, location.pathname]) */
+  const authLoc = loginLoc() || regLoc();
+
+  return (
+    <header className={(isMain() ? "" : "header_place_movies") + " header" + (authLoc ? " header_place_auth" : "")}>
+      <nav className={"header__head" + (authLoc ? " header__head_place_auth " : "")}>
+        <Link to="/">
+          <div className={(authLoc ? " header__logo_place_auth " : "") + " header__logo button"} />
+        </Link>
+        {!authLoc 
+        ?
+        <Navigation loggedIn={loggedIn} isMain={isMain()} />
+        :
+        <h2 className="register__title">Добро пожаловать!</h2>
+        }
+        <Burger isMain={isMain()}/>
+      </nav>
+      {isMain() ? <Promo /> : null}
+    </header>
+  )
+}
+
+const HeaderLayout = ({ loggedIn }) => {
+  return (
+    <>
+      <Header loggedIn={loggedIn} />
+      <Outlet />
+    </>
+  )
+};
+
+export default HeaderLayout;

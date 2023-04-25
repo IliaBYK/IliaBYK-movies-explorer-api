@@ -1,17 +1,56 @@
-import { Link, withRouter } from 'react-router-dom';
+import { useContext, useCallback, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import CurrentUserContext from '../../context/CurrentUserContext';
+import { useAuth } from '../../hooks/useAuth';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { mainApi } from '../../utils/MainApi';
 
-function Login(props) {
+function Login({ error, onSubmit, loggedIn, setLoggedIn, handleSubmitLog }) {
+  /* const { signin } = useAuth(); */
+  /* const { setCurrentUser, setUserMovies } = useContext(CurrentUserContext); */
 
   const { values, errors, isValid, handleChange } = useFormAndValidation({
-    name: "",
     email: "",
     password: "",
   });
 
+  /* const getInitialData = useCallback(() => {
+    Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
+      .then(([userData, userMovie]) => {
+        setCurrentUser(userData);
+        setUserMovies(userMovie);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    if( loggedIn) getInitialData();
+  }, [getInitialData, loggedIn]); */
+
+  /* const handleSubmitLog = (values) => {
+    if (!values.email || !values.password) {
+      return;
+    }
+    authorize(values.email, values.password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          setLoggedIn(true);
+          setError('');
+          return <Navigate to={"/movies"} replace />
+        }
+      })
+      .catch((err) => {
+        setError(err.error || err.message);
+      })
+  } */
+
+
   function handleSubmit(e) {
     e.preventDefault();
-    return props.onSubmit(values);
+    handleSubmitLog(values);
   }
 
   const spanErrorClassName = (error) => "register__error" + (error ? " register__error_active" : "");
@@ -27,7 +66,7 @@ function Login(props) {
             <span className="register__span">E-Mail</span>
             <input
               className={inputErrorClassName(errors.email)}
-              value={values.email ?? ""}
+              value={values?.email}
               error={errors.email}
               onChange={handleChange}
               label="E-mail"
@@ -51,9 +90,10 @@ function Login(props) {
             <span className={spanErrorClassName(errors.password)}>{errors.password}</span>
           </label>
         </fieldset>
+        <p className="register__error_login">{error ? error : ""}</p>
         <button
           disabled={!isValid}
-          className={"register__btn button" + (isValid ? "" : " button_disabled")}
+          className={"register__btn button" + (isValid ? "" : " register__btn_disabled")}
           type="submit"
         >Войти</button>
       </form>
@@ -64,4 +104,4 @@ function Login(props) {
   )
 }
 
-export default withRouter(Login);
+export default Login;

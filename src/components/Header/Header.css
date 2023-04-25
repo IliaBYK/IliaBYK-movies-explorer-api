@@ -13,8 +13,8 @@
 }
 
 .header_place_movies {
-  display: flex;
-  justify-content: space-between;
+/*   display: flex;
+  justify-content: space-between; */
   background: none;
   max-width: 1140px;
 }
@@ -24,6 +24,10 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+
+.header__head_place_auth {
+  display: block;
 }
 
 .header__navbar {
@@ -115,6 +119,10 @@
   font-weight: 500;
 }
 
+.header__navlink_logged_in {
+  color: var(--color-white);
+}
+
 @media screen and (max-width: 1240px) and (min-width: 1024px) {
   .header {
     padding: 19px 4% 0;
@@ -136,7 +144,7 @@
   }
   .header__logo {
     box-sizing: border-box;
-    margin: 5px 0 0;
+    margin: 4px 0 0;
   }
   .header__logo_place_auth {
     margin-bottom: 40px;

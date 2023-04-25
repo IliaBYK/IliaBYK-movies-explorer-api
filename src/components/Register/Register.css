@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  position: relative;
 }
 
 .register__set {
@@ -94,6 +95,12 @@
   line-height: 17px;
 }
 
+.register__btn_disabled {
+  background: var(--color-btn-disabled);
+  color: var(--color-btn-disabled-text);
+  pointer-events: none;
+}
+
 .register__span-link {
   font-size: 14px;
   line-height: 17px;
@@ -110,6 +117,15 @@
   position: absolute;
   top: 39px;
   left: 0;
+}
+
+.register__error_login {
+  position: absolute;
+  bottom: 75px;
+  color: var(--color-red);
+  margin: 0;
+  display: block;
+  text-align: center;
 }
 
 .register__field:last-child .register__error {
