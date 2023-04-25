@@ -6,8 +6,10 @@ function SearchFormHook({ movieQuery, shorts, setSearchParams, error, handleSear
   const [checked, setChecked] = useState(shorts);
 
   useEffect(() => {
-    setChecked(JSON.parse(sessionStorage.getItem("params")).shorts);
-    setSearch(JSON.parse(sessionStorage.getItem("params")).movie);
+    const check = JSON.parse(sessionStorage.getItem("params"))?.shorts;
+    check && setChecked(check);
+    const filter = JSON.parse(sessionStorage.getItem("params"))?.movie;
+    filter && setSearch(filter);
   }, [])
 
   const handleSubmit = (e) => {

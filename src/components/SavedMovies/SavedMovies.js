@@ -57,7 +57,7 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
     /* const movies = sessionStorage.getItem("all_movies"); */
     const params = JSON.parse(sessionStorage.getItem("params"))
     /* movies && setSavedMovies(JSON.parse(movies)); */
-    setSearchParams(params);
+    params && setSearchParams(params);
   }, [setSearchParams])
 
   /* const controllers = useMemo(

@@ -98,7 +98,7 @@ function Movies (/* {handleMovieDelete, handleSave} */) {
     const movies = sessionStorage.getItem("all_movies");
     const params = sessionStorage.getItem("params")
     movies && setMovies(JSON.parse(movies));
-    setSearchParams(JSON.parse(params));
+    params && setSearchParams(JSON.parse(params));
   }, [setSearchParams])
 
   const getMovies = useCallback((/* value */) => {

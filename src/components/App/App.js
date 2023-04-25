@@ -38,6 +38,7 @@ import Modal from '../Modal/Modal';
 import HeaderLayout from '../Header/Header';
 import FooterLayout from '../Footer/Footer';
 import RequireAuth from '../ProtectedRoute/RequireAuth';
+import { Helmet } from 'react-helmet';
 
 function App() {
 
@@ -90,8 +91,17 @@ function App() {
     register(values.name, values.password, values.email)
       .then((res) => {
         if (res.statusCode !== 400) {
-          setError('');
-          navigate("/signin");
+          authorize(values.email, values.password)
+            .then((res) => {
+              if (res.token) {
+                checkToken(res.token);
+                localStorage.setItem('token', res.token);
+                setLoggedIn(true);
+                setError('');
+              }
+              setCurrentUser(res.user);
+              navigate("/movies")
+            })
         }
       }).catch(err => setError(err))
   }
@@ -118,7 +128,8 @@ function App() {
 
   /* const SetLang = () => {
     return (
-      <Helmet htmlAttributes={{ lang: 'ru' }}>
+      <Helmet>
+        <html lang="ru" />
         <title>Beatfilms</title>
       </Helmet>
     )
@@ -146,6 +157,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
+        {/* <SetLang /> */}
         <Routes>
           <Route element={<HeaderLayout loggedIn={loggedIn} />}>
             <Route element={<FooterLayout />}>
