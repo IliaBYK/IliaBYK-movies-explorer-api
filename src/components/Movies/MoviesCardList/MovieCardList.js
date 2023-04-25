@@ -76,13 +76,13 @@ function MoviesCardList({
         error={error}
         value={shorts}
       /> */}
-      {/* <SearchFormHook
+      <SearchFormHook
         movieQuery={movieQuery}
         shorts={shorts}
         setSearchParams={setSearchParams}
         error={error}
         handleSearch={handleSearch}
-      /> */}
+      />
       <Container class="cards" component="div" componentUl="ul" mix="cards">
         {error 
         ? 

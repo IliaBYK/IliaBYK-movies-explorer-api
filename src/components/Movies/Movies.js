@@ -28,7 +28,7 @@ function Movies (/* {handleMovieDelete, handleSave} */) {
   useEffect(() => {
     mainApi.getMovies().then(res => {
       setSavedMovies(res)
-      console.log(res);
+      /* console.log(res); */
     });
   }, [setSavedMovies]);
 
@@ -94,12 +94,12 @@ function Movies (/* {handleMovieDelete, handleSave} */) {
     getMovies(); */
   }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const movies = sessionStorage.getItem("all_movies");
     const params = sessionStorage.getItem("params")
     movies && setMovies(JSON.parse(movies));
-    setSearchParams(params);
-  }, [setSearchParams]) */
+    setSearchParams(JSON.parse(params));
+  }, [setSearchParams])
 
   const getMovies = useCallback((/* value */) => {
     if (!sessionStorage.getItem("all_movies")) {
@@ -200,13 +200,13 @@ function Movies (/* {handleMovieDelete, handleSave} */) {
 
   return (
     <Container component="main" mix="movies" class="movies">
-      <SearchFormHook
+      {/* <SearchFormHook
         movieQuery={movieQuery}
         shorts={shorts}
         setSearchParams={setSearchParams}
         error={error}
         handleSearch={handleSearch}
-      />
+      /> */}
       {/* <Suspense fallback={<Preloader />}>
         <Await resolve={{movies, userMovies}}> */}
           {/* {(resolvedMovies) => { */}

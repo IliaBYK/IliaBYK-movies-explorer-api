@@ -18,7 +18,7 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
   const [btnVisible, setBtnVisible] = useState(false);
   /* const [shorts, setShorts] = useState(false); */
   const [error, setError] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  /* const [searchTerm, setSearchTerm] = useState(""); */
 
   //useSearchParams
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,15 +43,22 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
 
   //useSearchParams
 
-  useEffect(() => {
+  /* useEffect(() => {
     const found = sessionStorage.getItem("found");
     const shorts = sessionStorage.getItem("shorts");
     const search = sessionStorage.getItem("search");
     /* found && setResults(JSON.parse(found)); */
-    /* shorts && setShorts(shorts); */
+    /* shorts && setShorts(shorts);
     search && setSearchTerm(search);
-    /* setResults(movies); */
-  }, [])
+    /* setResults(movies);
+  }, []) */
+
+  useEffect(() => {
+    /* const movies = sessionStorage.getItem("all_movies"); */
+    const params = JSON.parse(sessionStorage.getItem("params"))
+    /* movies && setSavedMovies(JSON.parse(movies)); */
+    setSearchParams(params);
+  }, [setSearchParams])
 
   /* const controllers = useMemo(
     () => ({
@@ -129,13 +136,13 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
 
   return (
     <Container component="main" mix="movies" class="movies">
-      <SearchFormHook
+      {/* <SearchFormHook
         movieQuery={movieQuery}
         shorts={shorts}
         setSearchParams={setSearchParams}
         error={error}
         handleSearch={handleSearch}
-      />
+      /> */}
       {/* <Suspense fallback={<Preloader />}>
         <Await resolve={movies}> */}
           <MoviesCardList
@@ -144,7 +151,7 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
             isLoading={isLoading}
             handleMovieDelete={handleMovieDelete}
             handleSearch={handleSearch}
-            value={searchTerm}
+            /* value={searchTerm} */
             btnVisible={btnVisible}
             savedMovies={savedMovies}
             shorts={shorts}

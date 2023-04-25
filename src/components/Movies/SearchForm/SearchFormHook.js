@@ -5,11 +5,10 @@ function SearchFormHook({ movieQuery, shorts, setSearchParams, error, handleSear
   const [search, setSearch] = useState(movieQuery);
   const [checked, setChecked] = useState(shorts);
 
-  /* useEffect(() => {
-    sessionStorage.setItem("shorts", checked);
-    const isShorts = sessionStorage.getItem("shorts");
-    isShorts && setChecked(JSON.parse(isShorts));
-  }, [checked]) */
+  useEffect(() => {
+    setChecked(JSON.parse(sessionStorage.getItem("params")).shorts);
+    setSearch(JSON.parse(sessionStorage.getItem("params")).movie);
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +22,8 @@ function SearchFormHook({ movieQuery, shorts, setSearchParams, error, handleSear
     if(query.length) params.movie = query;
     if(isShorts) params.shorts = true;
 
+    sessionStorage.setItem("params", JSON.stringify(params));
+
     setSearchParams(params);
     handleSearch(search);
   }
@@ -33,9 +34,10 @@ function SearchFormHook({ movieQuery, shorts, setSearchParams, error, handleSear
 
     const params = {}
 
-    if (query.length) params.movie = query;
+    if (query?.length) params.movie = query;
     if (isShorts) params.shorts = true;
-    /* sessionStorage.setItem("params", JSON.stringify(params)); */
+
+    sessionStorage.setItem("params", JSON.stringify(params));
 
     setSearchParams(params);
   }
