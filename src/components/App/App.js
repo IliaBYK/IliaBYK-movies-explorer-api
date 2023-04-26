@@ -159,8 +159,8 @@ function App() {
       <div className="page">
         {/* <SetLang /> */}
         <Routes>
-          <Route element={<HeaderLayout loggedIn={loggedIn} />}>
-            <Route element={<FooterLayout />}>
+          <Route path="/" element={<HeaderLayout loggedIn={loggedIn} />}>
+            <Route path="" element={<FooterLayout />}>
               {/* <Route
                 loader={loggedIn && userLoader}
                 id={"user"}
