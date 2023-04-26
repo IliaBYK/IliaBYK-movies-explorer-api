@@ -159,8 +159,8 @@ function App() {
       <div className="page">
         {/* <SetLang /> */}
         <Routes>
-          <Route path="/" element={<HeaderLayout loggedIn={loggedIn} />}>
-            <Route path="" element={<FooterLayout />}>
+          <Route element={<HeaderLayout loggedIn={loggedIn} />}>
+            <Route element={<FooterLayout />}>
               {/* <Route
                 loader={loggedIn && userLoader}
                 id={"user"}
@@ -181,7 +181,7 @@ function App() {
               <Route
                 /* loader={loggedIn && savedMoviesLoader}
                 id="savedMovies" */
-                path="saved-movies"
+                path="/saved-movies"
                 errorElement={<Modal />}
                 element={
                   <ProtectedRoute
@@ -204,7 +204,7 @@ function App() {
               <Route
                 /* loader={loggedIn && moviesLoader} */
                 //id={"movies"}
-                path="movies"
+                path="/movies"
                 /* errorElement={<Modal />} */
                 element={
                   <ProtectedRoute
@@ -218,7 +218,7 @@ function App() {
               /* loader={loader} */
               />
               <Route
-                path="profile"
+                path="/profile"
                 /* errorElement={<Modal />} */
                 element={
                   <ProtectedRoute
@@ -233,7 +233,7 @@ function App() {
               />
               <Route
                 index
-                path=""
+                path="/"
                 element={
                   <Main loggedIn={loggedIn} />
                 }
@@ -295,12 +295,12 @@ function App() {
                 }
                 /> */}
               <Route
-                path="*"
+                path="/*"
                 element={<NotFound />}
               />
               {/* </Route> */}
               <Route
-                path="signup"
+                path="/signup"
                 /* errorElement={<Modal />} */
                 element={
                   loggedIn
@@ -316,7 +316,7 @@ function App() {
                 }
               />
               <Route
-                path="signin"
+                path="/signin"
                 /* errorElement={<Modal />} */
                 element={
                   loggedIn
