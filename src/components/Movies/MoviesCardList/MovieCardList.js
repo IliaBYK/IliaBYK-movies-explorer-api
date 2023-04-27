@@ -95,7 +95,7 @@ function MoviesCardList({
           (/* shorts ? shortMovieElements :  */movieElements))}
       </Container>
       <p>{movieElements?.length === 0 && movies?.length !== 0 && !error && movieQuery && !isLoading && "Ничего не найдено..."}</p>
-      {btnVisible && items < moviesFilter?.length && !isLoading/* && (shorts ? items < shortMovies?.length : true) */ && <MoviesMore onClick={loadMore} text="Ещё" /> }
+      {btnVisible && items < movies?.length && items < moviesFilter?.length && !isLoading/* && (shorts ? items < shortMovies?.length : true) */ && <MoviesMore onClick={loadMore} text="Ещё" /> }
     </>
   )
 }

@@ -86,6 +86,7 @@ function Movies (/* {handleMovieDelete, handleSave} */) {
     if (sessionStorage.getItem("all_movies")) {
       const data = sessionStorage.getItem("all_movies");
       setMovies(JSON.parse(data));
+      setBtnVisible(true);
     }
     /* async function getMovies() {
       const res = await mainApi.getMovies();
