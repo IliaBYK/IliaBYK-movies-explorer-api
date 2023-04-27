@@ -341,7 +341,7 @@ function App() {
                 element={
                   loggedIn
                     ?
-                    <Navigate to={'/movies'} />
+                    <Navigate to={'/'} />
                     :
                     <Register
                       handleSubmitReg={handleSubmitReg}
@@ -357,7 +357,7 @@ function App() {
                 element={
                   loggedIn
                     ?
-                    <Navigate to={'/saved-movies'} />
+                    <Navigate to={'/'} />
                     :
                     <Login
                       handleSubmitLog={handleSubmitLog}
