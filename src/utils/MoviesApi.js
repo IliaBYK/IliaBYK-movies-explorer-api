@@ -11,7 +11,7 @@ class MoviesApi extends Api {
   }
 
   getMovies() {
-    return this._getResponse("/beatfilm-movies", "GET");
+    return this._getResponseMovies("/beatfilm-movies", "GET");
   }
 }
 

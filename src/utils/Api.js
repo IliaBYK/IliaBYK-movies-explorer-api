@@ -23,5 +23,13 @@ export default class Api {
       else options.body = JSON.stringify(body);
     return fetch(this._baseUrl + url, options).then(this._checkDataResponse);
   }
+
+  _getResponseMovies(url, method, body) {
+    const options = { ...this._options, method };
+    if (body)
+      if (typeof body === "string") options.body = body;
+      else options.body = JSON.stringify(body);
+    return fetch(this._baseUrl + url, options).then(this._checkDataResponse);
+  }
 }
 
