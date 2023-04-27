@@ -97,7 +97,10 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
     /* sessionStorage.setItem("search", value); */
   }, [])
 
-  useEffect(() => getMovies(), [getMovies])
+  useEffect(() => {
+    getMovies();
+    if(savedMovies)setBtnVisible(true);
+  }, [getMovies])
 
   const handleMovieDelete = (movie) => {
     return mainApi.deleteMovie(movie._id)
