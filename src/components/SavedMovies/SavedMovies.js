@@ -97,6 +97,8 @@ function SavedMovies(/* {handleMovieDelete, userMovies} */) {
     /* sessionStorage.setItem("search", value); */
   }, [])
 
+  useEffect(() => getMovies(), [getMovies])
+
   const handleMovieDelete = (movie) => {
     return mainApi.deleteMovie(movie._id)
       .then(() => {
