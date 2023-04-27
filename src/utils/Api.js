@@ -3,8 +3,8 @@ export default class Api {
     this._baseUrl = baseUrl;
     this._options = options;
 
-    const token = localStorage.getItem("token");
-    if (token) this._options.headers.authorization = "Bearer " + token;
+    /* const token = localStorage.getItem("token");
+    if (token) this._options.headers.authorization = "Bearer " + token; */
   }
 
   _checkDataResponse(res) {
