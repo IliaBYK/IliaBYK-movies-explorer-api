@@ -4,4 +4,4 @@
 
 * [Ссылка на pull-request](https://github.com/IliaBYK/movies-explorer-frontend/pull/3)
 
-* [Ссылка на фронтенд](bitfilms.ibyk.nomoredomainsclub.ru)
+* [Ссылка на фронтенд](https://bitfilms.ibyk.nomoredomainsclub.ru/)
