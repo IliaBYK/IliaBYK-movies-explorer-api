@@ -187,6 +187,7 @@ function App() {
     localStorage.clear();
     sessionStorage.clear();
     setCurrentUser({});
+    navigate("/")
   }
 
   return (
