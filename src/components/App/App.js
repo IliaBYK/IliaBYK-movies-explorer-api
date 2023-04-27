@@ -43,7 +43,7 @@ import { Helmet } from 'react-helmet';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("login"));
   const [error, setError] = useState("");
   /* const [savedMovies, setSavedMovies] = useState([]); */
 
@@ -54,10 +54,12 @@ function App() {
     if (token) {
       checkToken(token).then((res) => {
         setLoggedIn(true);
+        localStorage.setItem("login", JSON.stringify(true));
         setCurrentUser(res);
         setError("");
       }).catch(err => {
         setLoggedIn(false);
+        localStorage.setItem("login", JSON.stringify(false));
         setError(err.code === 401 ? "Необходима авторизация" : JSON.stringify(err));
         console.log(err)
       });
@@ -98,6 +100,7 @@ function App() {
                 checkToken(res.token);
                 localStorage.setItem('token', res.token);
                 setLoggedIn(true);
+                localStorage.setItem("login", JSON.stringify(true));
                 setError('');
               }
               setCurrentUser(res.user);
@@ -132,6 +135,7 @@ function App() {
           checkToken(res.token);
           localStorage.setItem('token', res.token);
           setLoggedIn(true);
+          localStorage.setItem("login", JSON.stringify(true));
           setError('');
         }
         setCurrentUser(res.user);
@@ -184,6 +188,7 @@ function App() {
   const handleSignOut = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
+    localStorage.removeItem("login");
     localStorage.clear();
     sessionStorage.clear();
     setCurrentUser({});
