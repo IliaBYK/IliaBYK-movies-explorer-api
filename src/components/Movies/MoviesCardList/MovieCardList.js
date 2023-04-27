@@ -94,9 +94,7 @@ function MoviesCardList({
           (/* isLoading */isLoading ? <Preloader /> : 
           (/* shorts ? shortMovieElements :  */movieElements))}
       </Container>
-      {moviesFilter?.length === 0 && !error && movieQuery && !isLoading && (
-        <p>Ничего не найдено...</p>
-      )}
+      <p>{movieElements?.length === 0 && movies?.length !== 0 && !error && movieQuery && !isLoading && "Ничего не найдено..."}</p>
       {btnVisible && items < moviesFilter?.length && !isLoading/* && (shorts ? items < shortMovies?.length : true) */ && <MoviesMore onClick={loadMore} text="Ещё" /> }
     </>
   )
