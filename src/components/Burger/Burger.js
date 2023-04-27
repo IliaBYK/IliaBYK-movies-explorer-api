@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Menu from "../Menu/Menu";
 
 function Burger (props) {
   const [btnClass, setBtnClass] = useState("burger__btn ")
   const [isOpen, setIsOpen] = useState(false)
   /* const [isMenuClicked, setIsMenuClicked] = useState(false) */
+
+  const location = useLocation();
+
+  const loginLoc = () => location.pathname === "/signin";
+  const regLoc = () => location.pathname === "/signup";
+
+  const authLoc = loginLoc() || regLoc();
 
   const updateMenu = () => {
     if (!isOpen) {
@@ -25,7 +33,7 @@ function Burger (props) {
   return (
     <>
       <Menu isOpen={isOpen} clickLink={handleClickLink}/>
-      <div className={"burger button"} onClick={updateMenu}>
+      <div className={authLoc ? "burger_loc_auth" : "burger button"} onClick={updateMenu}>
         <span className={(isOpen ? btnClass : "burger__btn ") + (props.isMain ? "burger__btn_color_white" : "")} />
       </div>
     </>

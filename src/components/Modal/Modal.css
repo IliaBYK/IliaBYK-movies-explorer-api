@@ -27,3 +27,12 @@
   font-size: 40px;
   color: var(--color-red);
 }
+
+@media screen and (max-width: 1023px) {
+  .modal {
+    width: 300px;
+  }
+  .modal__error {
+    font-size: 20px;
+  }
+}
