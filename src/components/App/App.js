@@ -44,7 +44,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   /* const [savedMovies, setSavedMovies] = useState([]); */
 
   const navigate = useNavigate();
@@ -55,6 +55,7 @@ function App() {
       checkToken(token).then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
+        setError("");
       }).catch(err => {
         setLoggedIn(false);
         setError(err.code === 401 ? "Необходима авторизация" : JSON.stringify(err));
@@ -103,7 +104,22 @@ function App() {
               navigate("/movies")
             })
         }
-      }).catch(err => setError(err))
+      }).catch(err => {
+        setError(
+          err 
+          || 
+          err.statusCode === 409 
+          ? 
+          JSON.stringify(
+              err.statusCode === 400
+              ?
+              "Введены невалидные данные"
+              :
+              err.message) 
+          : 
+          JSON.stringify(err)
+        )
+      })
   }
 
   const handleSubmitLog = (values) => {
@@ -122,7 +138,20 @@ function App() {
         navigate("/movies")
       })
       .catch((err) => {
-        setError(JSON.stringify(err) || err);
+        setError(
+          err 
+          || 
+          err.statusCode === 409 
+          ? 
+          JSON.stringify(
+              err.statusCode === 400
+              ?
+              "Введены невалидные данные"
+              :
+              err.message) 
+          : 
+          JSON.stringify(err)
+        )
       })
   }
 
@@ -136,14 +165,20 @@ function App() {
   } */
 
   function handleUpdateUser(inputs) {
-    return mainApi.setUserInfo(inputs)
+    if(inputs.name === currentUser.name && inputs.email === currentUser.email) {
+      setError("Данные не изменены");
+      return;
+    } else {
+      return mainApi.setUserInfo(inputs)
       .then((user) => {
         setCurrentUser(user);
+        setError("");
       })
       .catch(err => {
-        setError(err)
+        setError(err || JSON.stringify(err) || err === "Ошибка: 400" ? "Введены невалидные данные" : "")
         console.log(err)
       });
+    }
   }
 
   const handleSignOut = () => {
@@ -227,7 +262,8 @@ function App() {
                     setLoggedIn={setLoggedIn}
                     user={currentUser}
                     signOut={handleSignOut}
-                    onSubmit={handleUpdateUser}
+                    handleUpdateUser={handleUpdateUser}
+                    error={error}
                   />
                 }
               />

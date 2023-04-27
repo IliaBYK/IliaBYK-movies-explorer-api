@@ -6,7 +6,7 @@ import Container from "../Container/Container";
 import { useAuth } from "../../hooks/useAuth";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function Profile ({signOut, handleUpdateUser, user}) {
+function Profile ({signOut, handleUpdateUser, user, error}) {
   //const {user} = useRouteLoaderData("user");
   /* const user = useAsyncValue(); */
   /* const {currentUser} = useContext(CurrentUserContext); */
@@ -20,25 +20,28 @@ function Profile ({signOut, handleUpdateUser, user}) {
     email: user?.email || " ",
   });
 
-  function edit() {
+  /* function edit() {
     if (!isEditing) {
       setIsEditing(true)
     } else {
       setIsEditing(false)
     }
-  }
+  } */
 
   function onSubmit(e) {
     e.preventDefault();
     if (!isEditing) {
+      setIsEditing(true);
+    } else {
+      setIsEditing(false);
       try {
         handleUpdateUser(values);
         setIsSucces(true);
       } catch (err) {
-        console.log(err);
+        console.log(err || JSON.stringify(err));
         setIsSucces(false)
       }
-    }
+    };
   }
 
   return (
@@ -66,8 +69,8 @@ function Profile ({signOut, handleUpdateUser, user}) {
             disabled={!isEditing} />
           <span className="profile__placeholder">E-Mail</span>
         </label>
-        {isSucces? <p className="profile__message">Изменения сохранены!</p> : ""}
-        <button className="profile__btn button" type="submit" onClick={edit}>{isEditing? "Сохранить" : "Редактировать"}</button>
+        {isSucces && <p className={"profile__message" + (error ? " profile__message_color_red" : "")}>{error ? error : "Изменения сохранены!"}</p>}
+        <button className="profile__btn button" type="submit" /* onClick={edit} */>{isEditing? "Сохранить" : "Редактировать"}</button>
       </form>
       <Link to="/signin" className="profile__out link" onClick={signOut}>Выйти из аккаунта</Link>
     </Container>
