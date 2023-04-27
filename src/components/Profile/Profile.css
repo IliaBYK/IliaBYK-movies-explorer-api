@@ -70,8 +70,27 @@
   .profile {
     padding: 236px 0 70px;
   }
+  .profile__label:first-child .profile__placeholder {
+    top: 4px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile {
+    padding: 84px 0 70px;
+  }
   .profile__form {
-    margin-bottom: 171px;
+    width: 260px;
+  }
+  .profile__btn {
+    margin: 361px 0 14px;
+    font-size: 12px;
+  }
+  .profile__out {
+    font-size: 12px;
+  }
+  .profile__placeholder {
+    left: 0;
   }
   .profile__label:first-child .profile__placeholder {
     top: 4px;

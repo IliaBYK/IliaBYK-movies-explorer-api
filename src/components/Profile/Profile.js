@@ -70,7 +70,7 @@ function Profile ({signOut, handleUpdateUser, /* user, */ error}) {
             onChange={handleChange}
             disabled={!isEditing}
             required />
-          <span className="profile__placeholder">E-Mail</span>
+          <span className="profile__placeholder">E-mail</span>
         </label>
         {isSucces && <p className={"profile__message" + (error ? " profile__message_color_red" : "")}>{error ? error : "Изменения сохранены!"}</p>}
         <button className="profile__btn button" type="submit" /* onClick={edit} */>{isEditing? "Сохранить" : "Редактировать"}</button>
