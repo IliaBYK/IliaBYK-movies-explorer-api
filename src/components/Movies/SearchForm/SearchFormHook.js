@@ -57,21 +57,6 @@ function SearchFormHook({ movieQuery, shorts, setSearchParams, error, handleSear
             value={search}
           />
           <button className="search__icon button" type="submit" />
-          {/* <fieldset className="filter__checkbox">
-            <div className="filter__slide">
-              <label className="filter__switch" htmlFor="checkbox">
-                <input
-                  className="filter__check"
-                  type="checkbox"
-                  name={"shorts"}
-                  checked={checked}
-                  onChange={e => setChecked(e.target.checked)}
-                />
-                <div className="filter__slider filter__round"></div>
-              </label>
-            </div>
-            <p className="filter__text">Короткометражки</p>
-          </fieldset> */}
           <FilterCheckbox 
             name={"shorts"} 
             onChange={(e) => {

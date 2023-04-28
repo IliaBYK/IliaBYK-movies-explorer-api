@@ -68,6 +68,10 @@
   display: block;
 }
 
+.card__btn_del {
+  background: url(../../../images/delete-movie.svg);
+}
+
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   .card__img {
     height: 190px;

@@ -1,33 +1,19 @@
 import { useContext, useState } from "react";
-import { Link, useAsyncValue, useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
-import { mainApi } from "../../utils/MainApi";
+import { Link } from "react-router-dom";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import Container from "../Container/Container";
-import { useAuth } from "../../hooks/useAuth";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function Profile ({signOut, handleUpdateUser, /* user, */ error}) {
-  //const {user} = useRouteLoaderData("user");
-  /* const user = useAsyncValue(); */
+function Profile ({signOut, handleUpdateUser, error}) {
   const currentUser = useContext(CurrentUserContext);
   
   const [isSucces, setIsSucces] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-/*   const { signout, handleUpdateUser, user } = useAuth(); */
- /*  const navigate = useNavigate(); */
 
   const { values, handleChange } = useFormAndValidation({
     email: currentUser.email || "",
     name: currentUser.name || "",
   });
-
-  /* function edit() {
-    if (!isEditing) {
-      setIsEditing(true)
-    } else {
-      setIsEditing(false)
-    }
-  } */
 
   function onSubmit(e) {
     e.preventDefault();
@@ -73,7 +59,7 @@ function Profile ({signOut, handleUpdateUser, /* user, */ error}) {
           <span className="profile__placeholder">E-mail</span>
         </label>
         {isSucces && <p className={"profile__message" + (error ? " profile__message_color_red" : "")}>{error ? error : "Изменения сохранены!"}</p>}
-        <button className="profile__btn button" type="submit" /* onClick={edit} */>{isEditing? "Сохранить" : "Редактировать"}</button>
+        <button className="profile__btn button" type="submit" >{isEditing? "Сохранить" : "Редактировать"}</button>
       </form>
       <Link to="/signin" className="profile__out link" onClick={signOut}>Выйти из аккаунта</Link>
     </Container>

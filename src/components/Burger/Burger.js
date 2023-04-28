@@ -5,7 +5,6 @@ import Menu from "../Menu/Menu";
 function Burger (props) {
   const [btnClass, setBtnClass] = useState("burger__btn ")
   const [isOpen, setIsOpen] = useState(false)
-  /* const [isMenuClicked, setIsMenuClicked] = useState(false) */
 
   const location = useLocation();
 

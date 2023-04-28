@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouteError } from "react-router-dom";
 
 function Modal({isOpen, error}) {
   const [isOpened, setIsOpened] = useState(isOpen);

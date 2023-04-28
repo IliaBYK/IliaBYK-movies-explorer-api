@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import CurrentUserContext from "../../../context/CurrentUserContext";
 
 function MoviesCard({ movie, deleteMovie, savedMovies, handleSave }) {
   const location = useLocation();

@@ -1,51 +1,33 @@
-import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import {
    Route, 
    Routes, 
    useNavigate, 
-   useLocation, 
    Navigate, 
-   RouterProvider, 
-   createBrowserRouter, 
-   createRoutesFromElements,
-   defer,
-   Await,
-   useLoaderData,
-   useRouteLoaderData
   } from 'react-router-dom';
 /* import { Helmet } from 'react-helmet'; */
 import { mainApi } from '../../utils/MainApi';
 import {authorize, register, checkToken} from "../../utils/Auth";
-import { AuthContext, AuthProvider } from '../ProtectedRoute/AuthProvider';
-import { userLoader } from '../Layout/Layout';
-import { Layout } from '../Layout/Layout';
-import Preloader from '../Movies/Preloader/Preloader';
-import Header from '../Header/Header'
 import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import ProtectedRouteLoggedIn from '../ProtectedRoute/ProtectedRouteLoggedIn';
-import { Movies/* , moviesLoader */ } from '../Movies/Movies';
-import { SavedMovies/* , savedMoviesLoader */ } from '../SavedMovies/SavedMovies';
+import { Movies } from '../Movies/Movies';
+import { SavedMovies } from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import './App.css';
-import { useAuth } from '../../hooks/useAuth';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import Modal from '../Modal/Modal';
 import HeaderLayout from '../Header/Header';
 import FooterLayout from '../Footer/Footer';
-import RequireAuth from '../ProtectedRoute/RequireAuth';
-import { Helmet } from 'react-helmet';
+/* import { Helmet } from 'react-helmet'; */
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("login"));
   const [error, setError] = useState("");
-  /* const [savedMovies, setSavedMovies] = useState([]); */
 
   const navigate = useNavigate();
 
@@ -65,30 +47,6 @@ function App() {
       });
     }
   }, [])
-
-  /* useEffect(() => {
-    if(loggedIn) mainApi.getUserInfo().then(res => setCurrentUser(res));
-  }, [loggedIn]) */
-
-  /* useEffect(() => {
-    if(loggedIn) mainApi.getMovies().then(setSavedMovies)
-  }, [loggedIn]) */
-
-  /* const getInitialData = useCallback(() => {
-    Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-      .then(([userData, userMovies]) => {
-        setCurrentUser(userData);
-        setSavedMovies(userMovies);
-      })
-      .catch((err) => {
-        setError(err)
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    if(loggedIn) getInitialData();
-  }, [loggedIn]); */
 
   const handleSubmitReg = (values) => {
     register(values.name, values.password, values.email)
@@ -202,65 +160,28 @@ function App() {
         <Routes>
           <Route element={<HeaderLayout loggedIn={loggedIn} />}>
             <Route element={<FooterLayout />}>
-              {/* <Route
-                loader={loggedIn && userLoader}
-                id={"user"}
-                path="/"
-                errorElement={<Modal />} 
-                element={
-                  loggedIn
-                  ?
-                  <Layout
-                    loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
-                    setError={setError}
-                  />
-                  :
-                  <Navigate to="/signin" />
-                }
-              > */}
               <Route
-                /* loader={loggedIn && savedMoviesLoader}
-                id="savedMovies" */
                 path="/saved-movies"
                 errorElement={<Modal />}
                 element={
                   <ProtectedRoute
-                    /* path="/saved-movies" */
                     component={SavedMovies}
                     loggedIn={loggedIn}
-                    /* handleMovieDelete={handleMovieDelete}
-                    userMovies={savedMovies} */
                   />
                 }
               
               />
-              {/* <Route 
-                path="saved-movies"
-                element={
-                  <RequireAuth>
-                    <SavedMovies />
-                  </RequireAuth>
-                }/> */}
               <Route
-                /* loader={loggedIn && moviesLoader} */
-                //id={"movies"}
                 path="/movies"
-                /* errorElement={<Modal />} */
                 element={
                   <ProtectedRoute
                     component={Movies}
                     loggedIn={loggedIn}
-                    /* handleMovieDelete={handleMovieDelete}
-                    handleSave={handleSave}
-                    savedMovies={savedMovies} */
                   />
                 }
-              /* loader={loader} */
               />
               <Route
                 path="/profile"
-                /* errorElement={<Modal />} */
                 element={
                   <ProtectedRoute
                     component={Profile}
@@ -280,70 +201,12 @@ function App() {
                   <Main loggedIn={loggedIn} />
                 }
               />
-              {/* <Route
-                path="/signin"
-                element={
-                  <ProtectedRouteLoggedIn
-                    component={Login}
-                    /* onSubmit={handleSubmitLog}
-                    loggedIn={loggedIn}
-                    error={error}
-                    setError={setError}
-                    setLoggedIn={setLoggedIn}
-                  />
-                }
-                /> */}
-              {/*  <Route
-                path="signin"
-                errorElement={<Modal />}
-                element={
-                  loggedIn
-                    ?
-                    (<Navigate to={'/movies'} />)
-                    :
-                    (<Login
-                      loggedIn={loggedIn}
-                      error={error}
-                      /* setError={setError}
-                      setLoggedIn={setLoggedIn}
-                    />
-                    )
-                }
-                  /> */}
-              {/* <Route
-                path="signup"
-                element={
-                  <ProtectedRouteLoggedIn
-                    component={Register}
-                    onSubmit={handleSubmitReg}
-                    loggedIn={loggedIn}
-                    error={error}
-                  />
-                }
-                /> */}
-              {/* <Route
-                path="/signup"
-                errorElement={<Modal />}
-                element={
-                  loggedIn ? (
-                    <Navigate to={'/movies'} />
-                  ) : (
-                    <Register
-                      loggedIn={loggedIn}
-                      error={error}
-                      setError={setError}
-                    />
-                  )
-                }
-                /> */}
               <Route
                 path="/*"
                 element={<NotFound />}
               />
-              {/* </Route> */}
               <Route
                 path="/signup"
-                /* errorElement={<Modal />} */
                 element={
                   loggedIn
                     ?
@@ -359,8 +222,7 @@ function App() {
               />
               <Route
                 path="/signin"
-                /* errorElement={<Modal />} */
-                element={
+                   element={
                   loggedIn
                     ?
                     <Navigate to={'/'} />

@@ -35,8 +35,6 @@ body {
 @import url(../src/components/Movies/MoviesCard/MoviesCard.css);
 @import url(../src/components/Movies/MoviesMore/MoviesMore.css);
 
-@import url(../src/components/SavedMovies/MoviesCard/MoviesSavedCard.css);
-
 @import url(../src/components/Profile/Profile.css);
 
 @import url(../src/components/Footer/Footer.css);

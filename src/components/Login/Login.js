@@ -1,52 +1,12 @@
-import { useContext, useCallback, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import CurrentUserContext from '../../context/CurrentUserContext';
-import { useAuth } from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import { mainApi } from '../../utils/MainApi';
 
-function Login({ error, onSubmit, loggedIn, setLoggedIn, handleSubmitLog }) {
-  /* const { signin } = useAuth(); */
-  /* const { setCurrentUser, setUserMovies } = useContext(CurrentUserContext); */
+function Login({ error, handleSubmitLog }) {
 
   const { values, errors, isValid, handleChange } = useFormAndValidation({
     email: "",
     password: "",
   });
-
-  /* const getInitialData = useCallback(() => {
-    Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-      .then(([userData, userMovie]) => {
-        setCurrentUser(userData);
-        setUserMovies(userMovie);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    if( loggedIn) getInitialData();
-  }, [getInitialData, loggedIn]); */
-
-  /* const handleSubmitLog = (values) => {
-    if (!values.email || !values.password) {
-      return;
-    }
-    authorize(values.email, values.password)
-      .then((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          setLoggedIn(true);
-          setError('');
-          return <Navigate to={"/movies"} replace />
-        }
-      })
-      .catch((err) => {
-        setError(err.error || err.message);
-      })
-  } */
-
 
   function handleSubmit(e) {
     e.preventDefault();
