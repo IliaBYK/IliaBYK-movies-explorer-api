@@ -19,7 +19,7 @@ function Login({ error, handleSubmitLog }) {
 
   return (
     <div className="register">
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form name="form" className="register__form" onSubmit={handleSubmit}>
         <fieldset className="register__set register__set_place_login">
           
           <label className="register__field">

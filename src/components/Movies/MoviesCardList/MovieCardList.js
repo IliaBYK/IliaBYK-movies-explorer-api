@@ -26,7 +26,7 @@ function MoviesCardList({
   const shorties = (movie) => shorts ? movie.duration <= 40 : movie.duration > 40;
   const moviesFilter = useMovieSearch(movies, movieQuery, shorties);
 
-  const movieElements = moviesFilter?.slice(0, items)?.map((movieItem) => (
+  const movieElements = (moviesFilter || savedMovies)?.slice(0, items)?.map((movieItem) => (
     <li key={movieItem.id || movieItem.movieId}>
       <MoviesCard 
         key={movieItem.id || movieItem.movieId}
@@ -43,7 +43,7 @@ function MoviesCardList({
         movieQuery={movieQuery}
         shorts={shorts}
         setSearchParams={setSearchParams}
-        error={error}
+        err={error}
         handleSearch={handleSearch}
       />
       <Container class="cards" component="div" componentUl="ul" mix="cards">

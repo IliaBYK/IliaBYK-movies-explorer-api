@@ -84,6 +84,11 @@ function App() {
   }
 
   const handleSubmitLog = (values) => {
+    const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if(!values.email.match(isValidEmail)) {
+      setError("Введите правильный email");
+      return;
+    }
     if (!values.email || !values.password) {
       return;
     }
@@ -126,12 +131,17 @@ function App() {
     )
   } */
 
-  function handleUpdateUser(inputs) {
-    if(inputs.name === currentUser.name && inputs.email === currentUser.email) {
+  function handleUpdateUser(values) {
+    const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if(!values.email.match(isValidEmail)) {
+      setError("Введите правильный email");
+      return;
+    } else setError("");
+    if(values.name === currentUser.name && values.email === currentUser.email) {
       setError("Данные не изменены");
       return;
     } else {
-      return mainApi.setUserInfo(inputs)
+      return mainApi.setUserInfo(values)
       .then((user) => {
         setCurrentUser(user);
         setError("");

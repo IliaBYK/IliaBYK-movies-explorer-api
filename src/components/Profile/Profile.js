@@ -20,7 +20,7 @@ function Profile ({signOut, handleUpdateUser, error}) {
     if (!isEditing) {
       setIsEditing(true);
     } else {
-      setIsEditing(false);
+      if (!error) setIsEditing(false);
       try {
         handleUpdateUser(values);
         setIsSucces(true);

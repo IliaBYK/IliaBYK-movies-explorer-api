@@ -125,11 +125,11 @@
   .burger__btn::after {
     width: 22px;
     height: 2.5px;
-    bottom: 9px;
+    bottom: 8px;
   }
   .burger__btn::before {
     width: 22px;
     height: 2.5px;
-    top: 9px;
+    top: 8px;
   }
 }

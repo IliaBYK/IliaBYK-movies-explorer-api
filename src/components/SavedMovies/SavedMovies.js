@@ -18,7 +18,7 @@ function SavedMovies() {
   const shorts = searchParams.has("shorts");
 
   useEffect(() => {
-    const params = JSON.parse(sessionStorage.getItem("params"))
+    const params = JSON.parse(sessionStorage.getItem("savedParams"))
     params && setSearchParams(params);
   }, [setSearchParams])
 
@@ -35,7 +35,7 @@ function SavedMovies() {
   useEffect(() => {
     getMovies();
     if(savedMovies)setBtnVisible(true);
-  }, [getMovies])
+  }, [])
 
   const handleMovieDelete = (movie) => {
     return mainApi.deleteMovie(movie._id)
