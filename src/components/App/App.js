@@ -79,6 +79,8 @@ function App() {
               err.message) 
           : 
           JSON.stringify(err)
+          ||
+          err.message
         )
       })
   }
@@ -118,6 +120,12 @@ function App() {
               err.message) 
           : 
           JSON.stringify(err)
+          || 
+          /* err.code === 401
+          ?
+          setError("Неправильные почта или пароль")
+          : */
+          err.message
         )
       })
   }

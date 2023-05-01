@@ -17,25 +17,28 @@ function SavedMovies() {
   const movieQuery = searchParams.get("movie") || "";
   const shorts = searchParams.has("shorts");
 
-  useEffect(() => {
+  /* useEffect(() => {
     const params = JSON.parse(sessionStorage.getItem("savedParams"))
     params && setSearchParams(params);
-  }, [setSearchParams])
+  }, [setSearchParams]) */
 
   const getMovies = useCallback(() => {
     setIsLoading(true);
     mainApi.getMovies()
       .then((data) => {
         setSavedMovies(data.reverse());
+        setBtnVisible(true)
       })
-      .catch(err => setError((err)))
+      .catch(err => {
+        setError((err));
+        setBtnVisible(false);
+      })
       .finally(() => setIsLoading(false));
   }, [])
 
   useEffect(() => {
     getMovies();
-    if(savedMovies)setBtnVisible(true);
-  }, [])
+  }, [getMovies])
 
   const handleMovieDelete = (movie) => {
     return mainApi.deleteMovie(movie._id)

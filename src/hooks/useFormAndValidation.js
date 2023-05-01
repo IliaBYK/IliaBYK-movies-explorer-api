@@ -20,4 +20,3 @@ export function useFormAndValidation(inputValues) {
 
   return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid };
 }
-
