@@ -1,43 +1,61 @@
-import { useState } from "react";
-import cards from "../../../utils/cards";
+import { useMovieSearch } from "../../../hooks/useMovieSearch";
 import Container from "../../Container/Container";
 import MoviesCard from "../../Movies/MoviesCard/MoviesCard";
+import SearchFormHook from "../SearchForm/SearchFormHook";
 import MoviesMore from "../../Movies/MoviesMore/MoviesMore";
+import Preloader from "../Preloader/Preloader";
+import { useMoviesCount } from "../../../hooks/useMoviesCount";
+import Modal from "../../Modal/Modal";
 
-function MoviesCardList () {
+function MoviesCardList({ 
+  movies, 
+  handleMovieDelete, 
+  handleSave, 
+  handleSearch, 
+  isLoading,
+  error, 
+  savedMovies, 
+  btnVisible,
+  shorts,
+  setSearchParams,
+  movieQuery,
+  }) {
 
-  const [cardsClass, setCardsClass] = useState("cards");
-  const [btnText, setbtnText] = useState("Ещё");
+  const {items, loadMore} = useMoviesCount();
 
-  function moreMovies () {
-    setCardsClass("cards cards__more");
-    setbtnText("Меньше")
-  }
+  const shorties = (movie) => shorts ? movie.duration <= 40 : movie.duration > 40;
+  const moviesFilter = useMovieSearch(movies, movieQuery, shorties);
 
-  function lessMovies() {
-    setCardsClass("cards");
-    setbtnText("Ещё")
-  }
-
-  function toggleMovies () {
-    if (cardsClass === "cards") {
-      moreMovies();
-    } else {
-      lessMovies();
-    }
-  }
-
-  const cardElements = cards.map((cardItem) => (<li key={cards.indexOf(cardItem)}>
-    <MoviesCard key={cards.indexOf(cardItem)}
-      card={cardItem} />
+  const movieElements = (moviesFilter || savedMovies)?.slice(0, items)?.map((movieItem) => (
+    <li key={movieItem.id || movieItem.movieId}>
+      <MoviesCard 
+        key={movieItem.id || movieItem.movieId}
+        movie={movieItem}
+        deleteMovie={handleMovieDelete}
+        handleSave={handleSave}
+        savedMovies={savedMovies}
+        isLoading={isLoading}/>
     </li>))
 
   return (
     <>
-      <Container class={cardsClass} component="div" componentUl="ul" mix="cards">
-        {cardElements}
+      <SearchFormHook
+        movieQuery={movieQuery}
+        shorts={shorts}
+        setSearchParams={setSearchParams}
+        err={error}
+        handleSearch={handleSearch}
+      />
+      <Container class="cards" component="div" componentUl="ul" mix="cards">
+        {error 
+        ? 
+          <Modal isOpen={error} error={error} />
+        : 
+          (isLoading ? <Preloader /> : 
+          (movieElements))}
       </Container>
-      <MoviesMore onClick={toggleMovies} text={btnText}/>
+      <p>{movieElements?.length === 0 && movies?.length !== 0 && !error && movieQuery && !isLoading && "Ничего не найдено..."}</p>
+      {btnVisible && (items < movies?.length || items < moviesFilter?.length) && !isLoading && <MoviesMore onClick={loadMore} text="Ещё" /> }
     </>
   )
 }

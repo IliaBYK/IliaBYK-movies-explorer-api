@@ -10,14 +10,18 @@
   padding: 2px 0 0;
 }
 
+.burger_loc_auth {
+  display: none;
+}
+
 .burger__btn {
   width: 28px;
   height: 3px;
   background-color: var(--color-black);
   z-index: 100;
   position: absolute;
-  top: 23px;
-  left: 8px;
+  top: 22px;
+  right: 25px;
   transition: all .7s linear;
 }
 
@@ -121,11 +125,11 @@
   .burger__btn::after {
     width: 22px;
     height: 2.5px;
-    bottom: 9px;
+    bottom: 8px;
   }
   .burger__btn::before {
     width: 22px;
     height: 2.5px;
-    top: 9px;
+    top: 8px;
   }
 }

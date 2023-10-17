@@ -1,17 +1,15 @@
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Login(props) {
-
+function Login({ error, handleSubmitLog }) {
   const { values, errors, isValid, handleChange } = useFormAndValidation({
-    name: "",
     email: "",
     password: "",
   });
 
   function handleSubmit(e) {
     e.preventDefault();
-    return props.onSubmit(values);
+    handleSubmitLog(values);
   }
 
   const spanErrorClassName = (error) => "register__error" + (error ? " register__error_active" : "");
@@ -20,14 +18,14 @@ function Login(props) {
 
   return (
     <div className="register">
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form name="form" className="register__form" onSubmit={handleSubmit}>
         <fieldset className="register__set register__set_place_login">
           
           <label className="register__field">
             <span className="register__span">E-Mail</span>
             <input
               className={inputErrorClassName(errors.email)}
-              value={values.email ?? ""}
+              value={values?.email}
               error={errors.email}
               onChange={handleChange}
               label="E-mail"
@@ -51,9 +49,10 @@ function Login(props) {
             <span className={spanErrorClassName(errors.password)}>{errors.password}</span>
           </label>
         </fieldset>
+        <p className="register__error_login">{error ? error : ""}</p>
         <button
           disabled={!isValid}
-          className={"register__btn button" + (isValid ? "" : " button_disabled")}
+          className={"register__btn button" + (isValid ? "" : " register__btn_disabled")}
           type="submit"
         >Войти</button>
       </form>
@@ -64,4 +63,4 @@ function Login(props) {
   )
 }
 
-export default withRouter(Login);
+export default Login;

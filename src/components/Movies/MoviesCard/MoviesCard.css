@@ -1,10 +1,12 @@
 .card {
-  width: 100%;
+  max-width: 360px;
   box-shadow: var(--shadow-card);
   border-radius: 6px;
   background: var(--color-bg-card);
   padding: 18px 0;
   box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
 .card__img {
@@ -13,6 +15,12 @@
   height: 200px;
   margin-bottom: 18px;
   object-fit: cover;
+  transition: all .5s linear;
+}
+
+.card__img:hover {
+  opacity: .8;
+  transform: scale(1.1);
 }
 
 .card__info {
@@ -26,6 +34,9 @@
   line-height: 18px;
   font-weight: 500;
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__time {
@@ -37,8 +48,10 @@
 }
 
 .card__btn {
-  background: url(../../../images/like.svg) no-repeat;
-  background-size: contain;
+  font-size: 12px;
+  line-height: 11px;
+  background: var(--color-grey-form-field);
+  border-radius: 30px;
   width: 100px;
   height: 29px;
   border: none;
@@ -47,10 +60,8 @@
 }
 
 .card__btn_save {
-  font-size: 12px;
-  line-height: 11px;
-  background: var(--color-grey-form-field);
-  border-radius: 30px;
+  background: url(../../../images/like.svg) no-repeat;
+  background-size: contain;
   width: 100px;
   height: 29px;
   border: none;

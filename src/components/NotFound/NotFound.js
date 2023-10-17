@@ -1,11 +1,11 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NotFound () {
 
-  const history = useHistory();
+  const navigation = useNavigate();
 
   function goBack () {
-    history.goBack();
+    navigation(-1);
   }
 
   return (

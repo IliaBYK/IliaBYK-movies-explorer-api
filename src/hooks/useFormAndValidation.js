@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 export function useFormAndValidation(inputValues) {
   const [values, setValues] = useState(inputValues);
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -20,4 +20,3 @@ export function useFormAndValidation(inputValues) {
 
   return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid };
 }
-

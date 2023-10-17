@@ -1,27 +1,69 @@
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-function MoviesCard ({ card }) {
-  const [isSaved, setIsSaved] = useState(false);
-  const [btnClass, setBtnClass] = useState("card__btn_save");
+function MoviesCard({ movie, deleteMovie, savedMovies, handleSave }) {
+  const location = useLocation();
 
-  function save () {
-    if (btnClass.includes("card__btn_save")) {
-      setIsSaved(true);
-      setBtnClass("card__btn");
+  const isSaved = savedMovies?.find(m => m.movieId === movie.movieId);
+
+  const savedMoviesPage = location.pathname === "/saved-movies";
+
+  const cardButtonClassName = `card__btn button${
+    isSaved
+      ? 
+        savedMoviesPage 
+        ?
+        ' card__btn_del'
+        :
+        ' card__btn_save'
+      : 
+      ''
+  }`;
+
+  const movieTime = (time) => {
+    let duration;
+    if (time > 60) {
+      const hours = Math.floor(time / 60);
+      const mins = time % 60;
+      duration = `${hours}ч${mins}м`
+      return duration;
     } else {
-      setIsSaved(false);
-      setBtnClass("card__btn_save");
+      return duration = `${time}м`;
     }
+  }
+
+  function handleSaveMovie() {
+    handleSave(movie);
+  }
+
+  function handleDelete() {
+    deleteMovie(isSaved);
   }
 
   return (
     <div className="card">
       <div className="card__info">
-        <div className="card__description">{card.description}</div>
-        <p className="card__time">{card.time}</p>
+        <div className="card__description">{movie.nameRU}</div>
+        <p className="card__time">{movieTime(movie.duration)}</p>
       </div>
-      <img className="card__img" alt="Здесь будет название фильма" src={card.img} />
-      <button onClick={save} className={btnClass + " button"}>{isSaved ? "" : "Сохранить"}</button>
+      <a 
+        href={movie.trailerLink} 
+        target="_blank" 
+        rel="noreferrer"
+      >
+        <img 
+          className="card__img" 
+          alt={movie.nameRU} 
+          src={movie.image} 
+        />
+      </a>
+      <button 
+        onClick={
+          isSaved ? () => handleDelete() : () => handleSaveMovie()
+        }
+        className={cardButtonClassName}
+      >
+        {isSaved ? "" : "Сохранить"}
+      </button>
     </div>
   )
 }

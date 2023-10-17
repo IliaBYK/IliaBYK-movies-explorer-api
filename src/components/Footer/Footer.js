@@ -1,14 +1,17 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import Container from "../Container/Container";
 
 function Footer () {
   const location = useLocation();
 
+  const authLoc = 
+    location.pathname === "/signin" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/profile";
+
   return (
     <Container title="Учебный проект Яндекс.Практикум х BeatFilm." 
-      class={location.pathname === "/signin" || 
-             location.pathname === "/signup" || 
-             location.pathname === "/profile" ? "footer_display_none" : "footer"} 
+      class={authLoc ? "footer_display_none" : "footer"} 
       component="footer" 
       mix="footer">
       <div className="footer__info">
@@ -34,4 +37,13 @@ function Footer () {
   )
 }
 
-export default Footer;
+const FooterLayout = () => {
+  return (
+    <>
+      <Outlet />
+      <Footer />
+    </>
+  )
+};
+
+export default FooterLayout;

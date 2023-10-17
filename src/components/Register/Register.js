@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function Register(props) {
-
+function Register({ error, handleSubmitReg }) {
   const { values, errors, isValid, handleChange } = useFormAndValidation({
     name: "",
     email: "",
@@ -11,7 +10,7 @@ function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    return props.onSubmit(values);
+    handleSubmitReg(values);
   }
 
   const spanErrorClassName = (error) => "register__error" + (error ? " register__error_active" : "");
@@ -66,9 +65,10 @@ function Register(props) {
             <span className={spanErrorClassName(errors.password)}>{errors.password}</span>
           </label>
         </fieldset>
+        <p className="register__error_login">{error ? error : ""}</p>
         <button
           disabled={!isValid}
-          className={"register__btn button" + (isValid ? "" : " button_disabled")}
+          className={"register__btn button" + (isValid ? "" : " register__btn_disabled")}
           type="submit"
         >Зарегистрироваться</button>
       </form>
